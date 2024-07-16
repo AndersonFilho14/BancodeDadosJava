@@ -4,7 +4,9 @@
  */
 package DAO;
 import Model.Usuario;
+import com.mysql.cj.jdbc.result.ResultSetFactory;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 
@@ -13,6 +15,7 @@ import java.sql.SQLException;
  * @author filho
  */
 public class UsuarioDAO {
+
         private final Connection connection;
 
     public UsuarioDAO(Connection connection) {
@@ -22,6 +25,17 @@ public class UsuarioDAO {
             
             String sql = "insert into usuario(usuario,senha) values ('"+usuario.getUsuario()+"','"+usuario.getSenha()+"'); ";
             connection.prepareStatement(sql).execute();
-            connection.prepareStatement(sql).close();
+             
         }
+        
+        public boolean existeNoBancoPorUsuarioESenha(Usuario usuario) throws SQLException {
+        String sql = "Select * from usuario where usuario  = '"+usuario.getUsuario()+"' and senha = '"+usuario.getSenha()+"'";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.execute();
+            
+            statement.getResultSet();
+            
+            return statement.getResultSet().next();
+    }
+        
 }

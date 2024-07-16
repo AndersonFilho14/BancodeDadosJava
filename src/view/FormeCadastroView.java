@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 
 /**
@@ -19,12 +21,14 @@ import java.util.logging.Logger;
  * @author filho
  */
 public class FormeCadastroView extends javax.swing.JFrame {
+    private final FormCadastroController controller;
+    
     /**
      * Creates new form FormeCadastroView
      */
     public FormeCadastroView() {
         initComponents();
-         = new FormCadastroController(this);
+        controller = new FormCadastroController(this);
     }
 
     /**
@@ -120,24 +124,38 @@ public class FormeCadastroView extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
          //Button de salvar  
-         
-         String usuario = jTextFieldUsuario.getText();
-         String senha = jPasswordFieldSenha.getText();
-         
-         
-         Usuario usuarioXandi = new Usuario(usuario,senha);
-        try {
-            Connection conexao = new Conexao().getConnection();
-            UsuarioDAO usuarioDao = new UsuarioDAO(conexao);
-            usuarioDao.insert(usuarioXandi);
-            
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(FormeCadastroView.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         
+        controller.salvarUsuario();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public JPasswordField getjPasswordFieldSenha() {
+        return jPasswordFieldSenha;
+    }
+
+    public void setjPasswordFieldSenha(JPasswordField jPasswordFieldSenha) {
+        this.jPasswordFieldSenha = jPasswordFieldSenha;
+    }
+
+    public JTextField getjTextFieldId() {
+        return jTextFieldId;
+    }
+
+    public void setjTextFieldId(JTextField jTextFieldId) {
+        this.jTextFieldId = jTextFieldId;
+    }
+
+    public JTextField getjTextFieldUsuario() {
+        return jTextFieldUsuario;
+    }
+
+    public void setjTextFieldUsuario(JTextField jTextFieldUsuario) {
+        this.jTextFieldUsuario = jTextFieldUsuario;
+    }
+
+    
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
